@@ -4,18 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mandelbrot {
-
-	// return number of iterations to check if c = a + ib is in Mandelbrot set
-	public static int mand(Complex z0, int max) {
-		Complex z = z0;
-		for (int t = 0; t < max; t++) {
-			if (z.abs() > 2.0)
-				return t;
-			z = z.mult(z).plus(z0);
-		}
-		return max;
-	}
-
+	
 	public static void main(String[] args) {
 		double xc, yc, size;
 		if (args == null || args.length != 3) {
