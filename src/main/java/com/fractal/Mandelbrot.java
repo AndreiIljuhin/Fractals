@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mandelbrot {
-	
+
 	public static void main(String[] args) {
 		double xc, yc, size;
 		if (args == null || args.length != 3) {
@@ -18,13 +18,13 @@ public class Mandelbrot {
 		}
 
 		int n = 500; // create n-by-n image
-		int max = 2000; // maximum number of iterations
+		int max = 10000; // maximum number of iterations
 
 		Picture picture = new Picture(n, n);
 
 		List<Processing> processings = new ArrayList<Processing>();
-		int divider = n / 10;
-		for (int i = 0; i < 10; i++) {
+		int divider = n / 50;
+		for (int i = 0; i < 50; i++) {
 			processings.add(new Processing(xc, yc, size, n, max, picture, divider * i, divider * (i + 1))); // Runnable
 		}
 
