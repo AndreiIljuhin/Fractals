@@ -7,7 +7,7 @@ import java.util.concurrent.CyclicBarrier;
 public class Processing implements Runnable {
 	private double xc;
 	private double yc;
-	private double size; //  field of vision
+	private double size; // field of vision
 	private final int n; // create n-by-n image
 	private final int max; // maximum number of iterations
 	private final Picture picture;
@@ -15,6 +15,7 @@ public class Processing implements Runnable {
 	private final int endI;
 	private final int pal;
 	private final CyclicBarrier bar;
+	private boolean draw = true; // drawing changes
 
 	Processing(double xc, double yc, double size, int n, int max, Picture picture, int startI, int endI,
 			CyclicBarrier bar) {
@@ -34,6 +35,7 @@ public class Processing implements Runnable {
 		this.xc = xc;
 		this.yc = yc;
 		this.size = size;
+		draw = true;
 	}
 
 	private int mand(Complex z0, int max) { // recursion in a loop
@@ -49,21 +51,24 @@ public class Processing implements Runnable {
 	public void run() {
 		try {
 			while (true) {
+				if (draw) {
+					for (int i = startI; i < endI; i++) {
+						for (int j = 0; j < n; j++) {
+							double x0 = xc - size / 2 + size * i / n;
+							double y0 = yc - size / 2 + size * j / n;
+							Complex z0 = new Complex(x0, y0);
+							int iter = mand(z0, max);
+							int col = 16581375 - pal * iter;
 
-				for (int i = startI; i < endI; i++) {
-					for (int j = 0; j < n; j++) {
-						double x0 = xc - size / 2 + size * i / n;
-						double y0 = yc - size / 2 + size * j / n;
-						Complex z0 = new Complex(x0, y0);
-						int iter = mand(z0, max);
-						int col = 16581375 - pal * iter;
-
-						Color color = new Color((byte) (col >>> 16) & 0xFF, (byte) (col >>> 8) & 0xFF,
-								(byte) col & 0xFF);
-						picture.set(i, n - 1 - j, color);
+							Color color = new Color((byte) (col >>> 16) & 0xFF, (byte) (col >>> 8) & 0xFF,
+									(byte) col & 0xFF);
+							picture.set(i, n - 1 - j, color);
+						}
 					}
-				}
-				
+					draw = false;
+				} else
+					Thread.sleep(200);
+
 				bar.await(); // waiting for the other threads and image rendering
 			}
 		} catch (InterruptedException e) {

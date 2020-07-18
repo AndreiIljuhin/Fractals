@@ -87,7 +87,7 @@ import javax.swing.JPanel;
  * @author Robert Sedgewick
  * @author Kevin Wayne
  */
-public final class Picture implements /*ActionListener,*/ KeyListener {
+public final class Picture implements /* ActionListener, */ KeyListener {
 	private BufferedImage image; // the rasterized image
 	private JFrame frame; // on-screen view
 	private String filename; // name of file
@@ -249,32 +249,32 @@ public final class Picture implements /*ActionListener,*/ KeyListener {
 	public void show() {
 
 		// create the GUI for viewing the image if needed
-        if (frame == null) {
-            frame = new JFrame();
+		if (frame == null) {
+			frame = new JFrame();
 
-            JMenuBar menuBar = new JMenuBar();
-            JMenu menu = new JMenu("Enter - zoom | Ctrl - decrease | Arrow Keys - Move Tile");
-            menuBar.add(menu);
-            JMenuItem menuItem1 = new JMenuItem(" Save...   ");
+			JMenuBar menuBar = new JMenuBar();
+			JMenu menu = new JMenu("Enter - zoom | Ctrl - decrease | Arrow Keys - Move Tile");
+			menuBar.add(menu);
+			JMenuItem menuItem1 = new JMenuItem(" Save...   ");
 //            menuItem1.addActionListener(this);
 //            menuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 //                                     Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-            menu.add(menuItem1);
-            frame.setJMenuBar(menuBar);
+			menu.add(menuItem1);
+			frame.setJMenuBar(menuBar);
 
+			frame.setContentPane(getJLabel());
+			// f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			if (filename == null)
+				frame.setTitle(width + "-by-" + height);
+			else
+				frame.setTitle(filename);
+			frame.setResizable(false);
+			frame.pack();
+			frame.setVisible(true);
 
-
-            frame.setContentPane(getJLabel());
-            // f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            if (filename == null) frame.setTitle(width + "-by-" + height);
-            else                  frame.setTitle(filename);
-            frame.setResizable(false);
-            frame.pack();
-            frame.setVisible(true);
-            
-            frame.addKeyListener(this);
-        }
+			frame.addKeyListener(this);
+		}
 
 		// draw
 		frame.repaint();
@@ -531,29 +531,34 @@ public final class Picture implements /*ActionListener,*/ KeyListener {
 
 	}
 
-	public boolean get_isLeft() {
+	public boolean is_Left() {
 		return isLeft;
 	}
 
-	public boolean get_isRight() {
+	public boolean is_Right() {
 		return isRight;
 	}
 
-	public boolean get_isUp() {
+	public boolean is_Up() {
 		return isUp;
 	}
 
-	public boolean get_isDown() {
+	public boolean is_Down() {
 		return isDown;
 	}
-	
-	public boolean get_isCtrl() {
+
+	public boolean is_Ctrl() {
 		return isCtrl;
 	}
 
-	public boolean get_isEnter() {
+	public boolean is_Enter() {
 		return isEnter;
 	}
+
+	public boolean have_event() {
+		return isEnter || isCtrl || isDown || isUp || isRight || isLeft;
+	}
+
 	/**
 	 * Unit tests this {@code Picture} data type. Reads a picture specified by the
 	 * command-line argument, and shows it in a window on the screen.
