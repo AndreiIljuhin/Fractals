@@ -7,7 +7,7 @@ import java.util.concurrent.CyclicBarrier;
 public class Processing implements Runnable {
 	private double xc;
 	private double yc;
-	private double size; // поле видимости
+	private double size; //  field of vision
 	private final int n; // create n-by-n image
 	private final int max; // maximum number of iterations
 	private final Picture picture;
@@ -36,7 +36,7 @@ public class Processing implements Runnable {
 		this.size = size;
 	}
 
-	private int mand(Complex z0, int max) { // рекурсия в цикле
+	private int mand(Complex z0, int max) { // recursion in a loop
 		Complex z = z0;
 		for (int t = 1; t < max; t++) {
 			if (z.abs() > 2.0)
@@ -64,7 +64,7 @@ public class Processing implements Runnable {
 					}
 				}
 				
-				bar.await(); // waiting for the other threads
+				bar.await(); // waiting for the other threads and image rendering
 			}
 		} catch (InterruptedException e) {
 		} catch (BrokenBarrierException e) {
