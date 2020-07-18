@@ -74,6 +74,5 @@ public class Processing implements Runnable {
 		} catch (InterruptedException e) {
 		} catch (BrokenBarrierException e) {
 		}
-		System.out.printf("%s finished... \n", Thread.currentThread().getName());
 	}
 }
