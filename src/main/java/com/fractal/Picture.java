@@ -531,27 +531,27 @@ public final class Picture implements /*ActionListener,*/ KeyListener {
 
 	}
 
-	public boolean getIsLeft() {
+	public boolean get_isLeft() {
 		return isLeft;
 	}
 
-	public boolean getIsRight() {
+	public boolean get_isRight() {
 		return isRight;
 	}
 
-	public boolean getIsUp() {
+	public boolean get_isUp() {
 		return isUp;
 	}
 
-	public boolean getIsDown() {
+	public boolean get_isDown() {
 		return isDown;
 	}
 	
-	public boolean getIsCtrl() {
+	public boolean get_isCtrl() {
 		return isCtrl;
 	}
 
-	public boolean getIsEnter() {
+	public boolean get_isEnter() {
 		return isEnter;
 	}
 	/**
