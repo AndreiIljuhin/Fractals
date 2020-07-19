@@ -22,36 +22,35 @@ public class Mandelbrot {
 
 		int n = 504; // create n-by-n image
 		int max = 10000; // maximum number of iterations
+		int nOfThreads = Runtime.getRuntime().availableProcessors();
 
 		Picture picture = new Picture(n, n);
 
-		List<Processing> processings = new ArrayList<Processing>(12);
-		ExecutorService taskExecutor = Executors.newFixedThreadPool(12);
+		List<Processing> processings = new ArrayList<Processing>(nOfThreads);
+		ExecutorService taskExecutor = Executors.newFixedThreadPool(nOfThreads);
 
-		CyclicBarrier bar = new CyclicBarrier(12, () -> { // executed at the end of the loop iteration
+		CyclicBarrier bar = new CyclicBarrier(nOfThreads, () -> { // executed at the end of the loop iteration
 			picture.show();
 			// events
-			if (picture.have_event()) {
-				if (picture.is_Ctrl())
-					size += size / 4;
-				else if (picture.is_Enter())
-					size -= size / 4;
-				if (picture.is_Left())
-					xc -= size / 10;
-				else if (picture.is_Right())
-					xc += size / 10;
-				if (picture.is_Up())
-					yc += size / 10;
-				else if (picture.is_Down())
-					yc -= size / 10;
-				for (Processing process : processings) {
-					process.set_coords(xc, yc, size);
-				}
+			if (picture.get_isCtrl())
+				size += size / 4;
+			else if (picture.get_isEnter())
+				size -= size / 4;
+			if (picture.get_isLeft())
+				xc -= size / 10;
+			else if (picture.get_isRight())
+				xc += size / 10;
+			if (picture.get_isUp())
+				yc += size / 10;
+			else if (picture.get_isDown())
+				yc -= size / 10;
+			for (Processing process : processings) {
+				process.set_coords(xc, yc, size);
 			}
 		});
 
-		int diviser = n / 12;
-		for (int i = 0; i < 12; i++) {
+		int diviser = n / nOfThreads;
+		for (int i = 0; i < nOfThreads; i++) {
 			processings.add(new Processing(xc, yc, size, n, max, picture, diviser * i, diviser * (i + 1), bar));
 		}
 
