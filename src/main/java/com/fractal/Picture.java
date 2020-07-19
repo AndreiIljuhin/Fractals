@@ -494,7 +494,7 @@ public final class Picture implements /* ActionListener, */ KeyListener {
 //
 //	}
 
-	// клавиша нажата, но не отпущена
+	// ГЄГ«Г ГўГЁГёГ  Г­Г Г¦Г ГІГ , Г­Г® Г­ГҐ Г®ГІГЇГіГ№ГҐГ­Г 
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			isLeft = true;
@@ -510,7 +510,7 @@ public final class Picture implements /* ActionListener, */ KeyListener {
 			isEnter = true;
 	}
 
-	// клавиша отпущена
+	// ГЄГ«Г ГўГЁГёГ  Г®ГІГЇГіГ№ГҐГ­Г 
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			isLeft = false;
@@ -526,32 +526,32 @@ public final class Picture implements /* ActionListener, */ KeyListener {
 			isEnter = false;
 	}
 
-	// клавиша нажата и отпущена
+	// ГЄГ«Г ГўГЁГёГ  Г­Г Г¦Г ГІГ  ГЁ Г®ГІГЇГіГ№ГҐГ­Г 
 	public void keyTyped(KeyEvent e) {
 
 	}
 
-	public boolean is_Left() {
+	public boolean get_isLeft() {
 		return isLeft;
 	}
 
-	public boolean is_Right() {
+	public boolean get_isRight() {
 		return isRight;
 	}
 
-	public boolean is_Up() {
+	public boolean get_isUp() {
 		return isUp;
 	}
 
-	public boolean is_Down() {
+	public boolean get_isDown() {
 		return isDown;
 	}
-
-	public boolean is_Ctrl() {
+	
+	public boolean get_isCtrl() {
 		return isCtrl;
 	}
 
-	public boolean is_Enter() {
+	public boolean get_isEnter() {
 		return isEnter;
 	}
 
