@@ -31,21 +31,23 @@ public class Mandelbrot {
 
 		CyclicBarrier bar = new CyclicBarrier(nOfThreads, () -> { // executed at the end of the loop iteration
 			picture.show();
-			// events
-			if (picture.get_isCtrl())
-				size += size / 4;
-			else if (picture.get_isEnter())
-				size -= size / 4;
-			if (picture.get_isLeft())
-				xc -= size / 10;
-			else if (picture.get_isRight())
-				xc += size / 10;
-			if (picture.get_isUp())
-				yc += size / 10;
-			else if (picture.get_isDown())
-				yc -= size / 10;
-			for (Processing process : processings) {
-				process.set_coords(xc, yc, size);
+
+			if (picture.have_event()) {
+				if (picture.get_isCtrl())
+					size += size / 4;
+				else if (picture.get_isEnter())
+					size -= size / 4;
+				if (picture.get_isLeft())
+					xc -= size / 10;
+				else if (picture.get_isRight())
+					xc += size / 10;
+				if (picture.get_isUp())
+					yc += size / 10;
+				else if (picture.get_isDown())
+					yc -= size / 10;
+				for (Processing process : processings) {
+					process.set_coords(xc, yc, size);
+				}
 			}
 		});
 
