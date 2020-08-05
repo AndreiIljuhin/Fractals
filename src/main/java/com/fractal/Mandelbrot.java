@@ -11,8 +11,8 @@ public class Mandelbrot {
 
 	public static void main(String[] args) {
 		if (args == null || args.length != 3) {
-			xc = -0.5626783737400001;
-			yc = 0.6567946173500001;
+			xc = -0.56267837374;
+			yc = 0.65679461735;
 			size = 0.000000064;
 		} else {
 			xc = Double.parseDouble(args[0]);
