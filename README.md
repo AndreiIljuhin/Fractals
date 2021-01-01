@@ -17,3 +17,5 @@ Used some code from
 https://introcs.cs.princeton.edu/java/stdlib/Picture.java.html
 https://introcs.cs.princeton.edu/java/32class/Complex.java.html
 https://introcs.cs.princeton.edu/java/32class/Mandelbrot.java.html
+
+![](https://github.com/AndreiIljuhin/Fractals/blob/master/screenshots/1.png)
